@@ -1,0 +1,7 @@
+{
+  "name": "busqueda_tesoro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
