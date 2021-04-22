@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Búsqueda del tesoro <ion-icon name="earth-outline"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img src="../../assets/img/tesoro.png" width="80" height="80" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <form>
+            <ion-item lines="full">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" #email required></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" #password required></ion-input>
+            </ion-item>
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" (click)="onLogin(email,password)" expand="block">Login</ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

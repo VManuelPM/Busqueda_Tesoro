@@ -1,0 +1,13 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!flagArrow" slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-button slot="start" *ngIf="flagArrow" (click)="back()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      {{textHeader}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

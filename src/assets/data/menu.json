@@ -1,0 +1,12 @@
+[
+    {
+        "icon": "person-outline",
+        "name": "My Games",
+        "router": "/my-games"
+    },
+    {
+        "icon": "game-controller-outline",
+        "name": "Games",
+        "router": "/games"
+    }
+]

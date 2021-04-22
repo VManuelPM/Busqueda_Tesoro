@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "busquedatesoro-a14e6": {
+      "hosting": {
+        "app": [
+          "busquedatesoro-a14e6"
+        ]
+      }
+    }
+  }
+}

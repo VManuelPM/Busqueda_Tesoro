@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.busqueda.tesoro",
   "appName": "busqueda_tesoro",
   "bundledWebRuntime": false,
   "npmClient": "npm",

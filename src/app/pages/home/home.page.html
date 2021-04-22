@@ -1,0 +1,16 @@
+<app-header [textHeader]="textHeader" [flagArrow]="flagArrow"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add-outline" [routerLink]="['/admin']"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
