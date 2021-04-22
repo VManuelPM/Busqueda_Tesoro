@@ -12,8 +12,8 @@
           <ion-label>{{option.name}}</ion-label>
         </ion-item>
       </ion-menu-toggle>
-      <ion-item>
-        <ion-icon slot="start" color="danger" name="log-out-outline" (click)="logout()"></ion-icon>
+      <ion-item (click)="logout()">
+        <ion-icon slot="start" color="danger" name="log-out-outline"></ion-icon>
         <ion-label>Logout</ion-label>
       </ion-item>
     </ion-list>
