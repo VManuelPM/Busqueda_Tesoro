@@ -3,53 +3,84 @@
 <ion-content>
   <div class="container">
     <ion-grid>
-      <form>
+      <form [formGroup]="gameForm" (ngSubmit)="saveGame()" novalidate>
+
         <ion-row>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Game</ion-label>
-              <ion-input type="text" #gameName required maxlength="50"></ion-input>
+              <ion-input type="text" formControlName="gameName" #gameName required maxlength="50"></ion-input>
             </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.gameName.errors?.required">
+              Game name is required
+            </span>
           </ion-col>
         </ion-row>
+
+        <ion-row class="center">
+          <ion-col size="12">
+            <img src="../../assets/img/user.png" width="200" height="200" *ngIf="!photo" />
+            <img [src]="photo" #image *ngIf="photo" />
+          </ion-col>
+          <span class="error ion-padding" *ngIf="isSubmitted && !photo">
+            Image is required
+          </span>
+        </ion-row>
+
         <ion-row>
-          <ion-col>
-            <ion-item lines="full">
-              <ion-label position="floating">Image</ion-label>
-              <ion-input type="" #password required></ion-input>
-            </ion-item>
+          <ion-col size="12" class="center">
+            <ion-button color="secondary" (click)="takePicture()">
+              Subir imagen
+            </ion-button>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Description:</ion-label>
-              <ion-input type="text" #description required maxlength="200"></ion-input>
+              <ion-input type="text" formControlName="description" required maxlength="200"></ion-input>
             </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
+              Description is required
+            </span>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Solution</ion-label>
-              <ion-input type="number" #solution required></ion-input>
+              <ion-input type="number" formControlName="solution" #solution required></ion-input>
             </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.solution.errors?.required">
+              Solution is required
+            </span>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Points</ion-label>
-              <ion-input type="" #password required></ion-input>
+              <ion-input type="number" formControlName="points" #points required></ion-input>
             </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.points.errors?.required">
+              Points are required
+            </span>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
-            <ion-button type="submit" (click)="" expand="block">Login</ion-button>
+            <ion-button type="submit" expand="block">Save</ion-button>
           </ion-col>
         </ion-row>
       </form>
     </ion-grid>
+
+    <ion-thumbnail *ngIf="url">
+      <img [src]="url" alt="">
+    </ion-thumbnail>
   </div>
 </ion-content>

@@ -9,11 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
-import { MenuComponent } from './components/menu/menu.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './components/menu/menu.component';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
+
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent,MenuComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -21,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFireStorageModule,
     HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
