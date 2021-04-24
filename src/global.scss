@@ -24,3 +24,37 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+//Css Alert
+ion-alert {
+  .alert-wrapper {
+    background: var(--ion-color-primary) !important;
+    color: var(--ion-color-light-tint) !important;
+
+    .alert-head {
+      h2 {
+        color: white;
+      }
+    }
+
+    .alert-message {
+      color: white;
+    }
+
+    .alert-button:nth-child(1) {
+      font-size: 15px;
+      color: rgb(224, 7, 7);
+      font-weight: bold;
+    }
+
+    .alert-button:nth-child(2) {
+      font-size: 15px;
+      color: rgb(1, 228, 1);
+      font-weight: bold;
+    }
+  }
+}
+
+ion-label {
+  font-weight: bold;
+}

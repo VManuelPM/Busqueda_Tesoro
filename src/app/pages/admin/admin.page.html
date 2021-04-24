@@ -4,7 +4,7 @@
   <div class="container">
     <ion-grid>
       <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
-
+        <ion-row></ion-row>
         <ion-row>
           <ion-col>
             <ion-item lines="full">
@@ -71,10 +71,16 @@
             </span>
           </ion-col>
         </ion-row>
-
         <ion-row>
-          <ion-col>
-            <ion-button type="submit" expand="block">{{textButton}}</ion-button>
+          <ion-col size="3" *ngIf="gid">
+            <ion-button expand="block" color="danger" (click)="deleteGame()">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="9">
+            <ion-button type="submit" expand="block" color="success">
+              {{textButton}}
+            </ion-button>
           </ion-col>
         </ion-row>
       </form>

@@ -10,6 +10,7 @@ import { ImageService } from '../../services/image.service';
 import { ToastService } from '../../services/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
+import { AlertController } from '@ionic/angular';
 
 const { Camera } = Plugins;
 @Component({
@@ -33,7 +34,6 @@ export class AdminPage implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    public formBuilder: FormBuilder,
     private gameService: GameService,
     private authService: AuthService,
     private imageService: ImageService,
@@ -41,7 +41,8 @@ export class AdminPage implements OnInit {
     private storageService: StorageService,
     private toastService: ToastService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public formBuilder: FormBuilder
   ) {
     this.gid = this.route.snapshot.params.gid;
 
@@ -131,6 +132,9 @@ export class AdminPage implements OnInit {
     );
   }
 
+  /**
+   * Save Game in DB
+   */
   saveGame() {
     //Convert image to base64
     this.imageService.readAsBase64(this.imageUpload).then((imageBase64) => {
@@ -160,6 +164,9 @@ export class AdminPage implements OnInit {
     });
   }
 
+  /**
+   * Updage Game
+   */
   updateGame() {
     if (this.photo && this.imageUpload) {
       this.game = this.getDataForm();
@@ -198,6 +205,30 @@ export class AdminPage implements OnInit {
     }
   }
 
+  deleteGame() {
+    if (this.gid) {
+      if (this.url) {
+        this.toastService
+          .presentAlertConfirm(
+            'Are you sure?',
+            'Do you want to delete this game?'
+          )
+          .then((flagAlert) => {
+            if (flagAlert === 'ok') {
+              this.storageService.deleteImage(this.url);
+              this.databaseService.deleteGeneric(this.gid, 'games');
+              this.toastService.presentToast('Game Deleted !!!');
+              this.router.navigate(['/my-games']);
+            }
+          });
+      }
+    }
+  }
+
+  /**
+   * Get Data from Imputs
+   * @returns Object with the structure of Game
+   */
   getDataForm() {
     return (this.objectForm = {
       image: this.url,

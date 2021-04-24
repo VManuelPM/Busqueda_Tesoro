@@ -14,4 +14,8 @@ export class DatabaseService {
   updateGeneric(id: string, data: any, nameCollection: string) {
     return this.firestore.collection(nameCollection).doc(id).update(data);
   }
+
+  deleteGeneric(id: string, nameCollection: string) {
+    return this.firestore.collection(nameCollection).doc(id).delete();
+  }
 }
