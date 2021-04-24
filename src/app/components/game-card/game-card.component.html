@@ -1,0 +1,23 @@
+<ion-card>
+  <div class="center-image">
+    <img [src]="gameObject.image" alt="img" width="200" height="200" />
+  </div>
+  <ion-card-header>
+    <ion-card-subtitle>Creator: {{user.email}}</ion-card-subtitle>
+    <ion-card-title>{{gameObject.gameName}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        {{gameObject.description}}
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-label color="secondary">Points: {{gameObject.points}}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

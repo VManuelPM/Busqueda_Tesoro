@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games.page.scss'],
 })
 export class GamesPage implements OnInit {
+  textHeader = 'My games';
+  flagArrow = true;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

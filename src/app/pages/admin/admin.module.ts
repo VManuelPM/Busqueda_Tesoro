@@ -15,8 +15,8 @@ import { HeaderComponent } from '../../components/header/header.component';
     FormsModule,
     IonicModule,
     AdminPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [AdminPage, HeaderComponent]
+  declarations: [AdminPage, HeaderComponent],
 })
 export class AdminPageModule {}

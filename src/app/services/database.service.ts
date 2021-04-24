@@ -10,4 +10,8 @@ export class DatabaseService {
   addGeneric(objectX: any, nameCollection: string): Promise<any> {
     return this.firestore.collection(nameCollection).add(objectX);
   }
+
+  updateGeneric(id: string, data: any, nameCollection: string) {
+    return this.firestore.collection(nameCollection).doc(id).update(data);
+  }
 }

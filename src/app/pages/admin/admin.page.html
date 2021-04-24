@@ -3,7 +3,7 @@
 <ion-content>
   <div class="container">
     <ion-grid>
-      <form [formGroup]="gameForm" (ngSubmit)="saveGame()" novalidate>
+      <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
 
         <ion-row>
           <ion-col>
@@ -19,10 +19,11 @@
 
         <ion-row class="center">
           <ion-col size="12">
-            <img src="../../assets/img/user.png" width="200" height="200" *ngIf="!photo" />
-            <img [src]="photo" #image *ngIf="photo" />
+            <img [src]="url" width="200" height="200" *ngIf="!photo && url" />
+            <img src="../../assets/img/user.png" width="200" height="200" *ngIf="!photo && !url" />
+            <img [src]="photo" #image width="200" height="200" *ngIf="photo" />
           </ion-col>
-          <span class="error ion-padding" *ngIf="isSubmitted && !photo">
+          <span class="error ion-padding" *ngIf="isSubmitted && !photo && !url">
             Image is required
           </span>
         </ion-row>
@@ -73,14 +74,10 @@
 
         <ion-row>
           <ion-col>
-            <ion-button type="submit" expand="block">Save</ion-button>
+            <ion-button type="submit" expand="block">{{textButton}}</ion-button>
           </ion-col>
         </ion-row>
       </form>
     </ion-grid>
-
-    <ion-thumbnail *ngIf="url">
-      <img [src]="url" alt="">
-    </ion-thumbnail>
   </div>
 </ion-content>

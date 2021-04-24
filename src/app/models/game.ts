@@ -1,6 +1,7 @@
 export interface Game {
-  gid?: string;
+  customIdName?: string;
   image: string;
+  gameName: string;
   description: string;
   solution: string;
   points: number;

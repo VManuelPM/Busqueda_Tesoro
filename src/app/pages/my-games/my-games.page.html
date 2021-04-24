@@ -1,9 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>my-games</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [textHeader]="textHeader" [flagArrow]="flagArrow"></app-header>
 
 <ion-content>
-
+  <app-game-card *ngFor="let game of games" [gameObject]="game" [user]="user" (click)="viewDetail(game)">
+  </app-game-card>
 </ion-content>

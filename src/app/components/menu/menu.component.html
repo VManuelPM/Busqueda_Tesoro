@@ -8,7 +8,7 @@
     <ion-list>
       <ion-menu-toggle *ngFor="let option of menuOptions | async">
         <ion-item [routerLink]="option.router">
-          <ion-icon slot="start" color="primary" [name]="option.icon"></ion-icon>
+          <ion-icon slot="start" color="tertiary" [name]="option.icon"></ion-icon>
           <ion-label>{{option.name}}</ion-label>
         </ion-item>
       </ion-menu-toggle>

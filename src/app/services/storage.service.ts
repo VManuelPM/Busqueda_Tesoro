@@ -20,4 +20,20 @@ export class StorageService {
       }
     }
   }
+
+  getImage(urlImage: string) {
+    try {
+      return this.storage.refFromURL(urlImage).getDownloadURL().toPromise();
+    } catch (error) {
+      console.log('error getting images storage -> ', error);
+    }
+  }
+
+  deleteImage(urlImage: string) {
+    try {
+      return this.storage.refFromURL(urlImage).delete().toPromise();
+    } catch (error) {
+      console.log('error getting images storage -> ', error);
+    }
+  }
 }
