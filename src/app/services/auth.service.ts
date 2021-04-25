@@ -8,23 +8,21 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
-  public user$:Observable<User>;
+  public user$: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user$ = this.afAuth.authState.pipe(
-      switchMap((user)=>{
-        if(user){
+      switchMap((user) => {
+        if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return of(null);
       })
-    )
+    );
   }
 
   /**
@@ -38,6 +36,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * Login to App
+   * @param email
+   * @param password
+   * @returns user from auth firebase
+   */
   async login(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(
@@ -51,6 +55,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * Update Info of user
+   * @param user User to update
+   * @returns User
+   */
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
@@ -61,10 +70,22 @@ export class AuthService {
       displayName: user.displayName,
     };
 
-    return userRef.set(data, {merge:true});
+    return userRef.set(data, { merge: true });
   }
 
-   async getCurrentuser(){
+  /**
+   * Get Current user
+   * @returns Promise with the user
+   */
+  async getCurrentuser() {
     return this.afAuth.currentUser;
+  }
+
+  /**
+   * Detect changes in autentication
+   * @returns Observable
+   */
+  getAuthState() {
+    return this.afAuth.authState;
   }
 }

@@ -10,4 +10,21 @@ ion-menu {
     /* optional, but it needs when you use gradient as a background color.*/
     background: transparent;
   }
+
+  ion-toolbar {
+    text-align: center;
+    padding-top: 17px;
+  }
+
+  .profile-picture {
+    height: 30vw;
+    width: 30vw;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
 }

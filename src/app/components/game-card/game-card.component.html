@@ -1,10 +1,10 @@
-<ion-card>
+<ion-card *ngIf="gameObject && user">
   <div class="center-image">
     <img [src]="gameObject.image" alt="img" width="200" height="200" />
   </div>
   <ion-card-header>
     <ion-card-subtitle>Creator: {{user.email}}</ion-card-subtitle>
-    <ion-card-title *ngIf="gameObject.gameName">{{gameObject.gameName}}</ion-card-title>
+    <ion-card-title>{{gameObject.gameName}}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <ion-grid>

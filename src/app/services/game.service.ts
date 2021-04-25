@@ -30,12 +30,39 @@ export class GameService {
     }
   }
 
+  getAllGames() {
+    return this.db
+      .collection<Game>('games')
+      .valueChanges({ idField: 'customIdName' });
+  }
+
+  /**
+   * Get Games except games where user is owner
+   * @param userId id of user
+   * @returns promise with games
+   */
+  getGames(userId) {
+    return this.db
+      .collection<Game>('games', (ref) => ref.where('uid', '!=', userId))
+      .valueChanges({ idField: 'customIdName' });
+  }
+
+  /**
+   * Get Games By User ID only Admin
+   * @param userId Id of User
+   * @returns promise with Games where user is owner
+   */
   getGamesByUserId(userId) {
     return this.db
       .collection<Game>('games', (ref) => ref.where('uid', '==', userId))
       .valueChanges({ idField: 'customIdName' });
   }
 
+  /**
+   * Get game by Id Game
+   * @param gameId Id of Game
+   * @returns Promise with the Game
+   */
   getGameByGameId(gameId) {
     return this.db.collection<Game>('games').doc(gameId).valueChanges();
   }

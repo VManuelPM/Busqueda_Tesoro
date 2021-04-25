@@ -6,6 +6,11 @@ import { LoggedGuard } from './guards/logged.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
@@ -44,10 +49,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    path: 'attempt/:gid',
+    loadChildren: () =>
+      import('./pages/attempt/attempt.module').then((m) => m.AttemptPageModule),
+    canActivate: [AuthGuard],
   },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { take, map } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user';
-import { UsersService } from '../../services/users.service';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { GameAttempt } from '../../models/game-attempt';
+import { AttemptService } from '../../services/attempt.service';
+import { AuthService } from '../../services/auth.service';
+import { GameService } from '../../services/game.service';
+import { Attempt } from '../../models/attempt';
+import { Game } from '../../models/game';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,26 +15,70 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  textHeader = 'Welcome';
+  textHeader = 'Welcome to Treasures';
   flagArrow = false;
+  attempts: Attempt[];
+  games: Game[];
+  attemptsGames;
+  pointsShow: number;
+  sub1: Subscription;
+  sub2: Subscription;
 
   constructor(
     private authSvc: AuthService,
-    private usersService: UsersService,
-    private menuController: MenuController
+    private menuController: MenuController,
+    private attemptService: AttemptService,
+    private gameService: GameService,
+    private router: Router
   ) {
+    this.pointsShow = 0;
+    this.games = [];
+    this.attempts = [];
     this.getDataUser();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async getDataUser() {
     this.authSvc.getCurrentuser().then((user) => {
-      user.uid;
+      if (user) {
+        this.sub1 = this.getAttempts(user.uid).subscribe((attempt) => {
+          this.attempts = attempt;
+          this.sub2 = this.getGames().subscribe((gameAll) => {
+            this.games = [];
+            this.games = gameAll;
+            this.attemptsGames = this.attempts.map((t1) => ({
+              ...t1,
+              ...this.games.find((t2) => t2.customIdName === t1.gid),
+            }));
+            this.getPoints(this.attempts);
+          });
+        });
+      }
     });
   }
 
-  ionViewWillEnter(){
+  getPoints(attempts) {
+    this.pointsShow = 0;
+    attempts.forEach((item) => {
+      this.pointsShow = this.pointsShow + item.pointsAttempt;
+    });
+  }
+
+  ionViewWillEnter() {
+    this.getDataUser();
     this.menuController.enable(true);
+  }
+
+  getAttempts(uid: string) {
+    return this.attemptService.getAttemptsByUId(uid);
+  }
+
+  getGames() {
+    return this.gameService.getAllGames();
+  }
+
+  detail(gameAtt) {
+    this.router.navigate(['/attempt', gameAtt.gid]);
   }
 }

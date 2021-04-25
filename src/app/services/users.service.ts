@@ -3,15 +3,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-
   user: User;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {}
 
-  getUserById(idUser: string){
-    return this.db.collection('users').doc(idUser).valueChanges();
+  getUserById(idUser: string) {
+    return this.db.collection<User>('users').doc(idUser).valueChanges();
   }
 }

@@ -1,7 +1,8 @@
 <ion-menu side="start" menuId="menu" contentId="main">
   <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="primary" *ngIf="user">
+      <img class="profile-picture" src="../../../assets/img/monkey.png" />
+      <h3 class="name">{{user.email}}</h3>
     </ion-toolbar>
   </ion-header>
   <ion-content>

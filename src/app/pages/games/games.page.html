@@ -1,5 +1,6 @@
 <app-header [textHeader]="textHeader" [flagArrow]="flagArrow"></app-header>
 
 <ion-content>
-  <app-game-card></app-game-card>
+  <app-game-card *ngFor="let game of games" [gameObject]="game" [user]="user" (click)="attempt(game)">
+  </app-game-card>
 </ion-content>

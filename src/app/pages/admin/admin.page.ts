@@ -74,7 +74,10 @@ export class AdminPage implements OnInit {
           Validators.maxLength(200),
         ],
       ],
-      solution: ['', [Validators.required]],
+      solution: [
+        '',
+        [Validators.required, Validators.min(10), Validators.max(99)],
+      ],
       points: [
         '',
         [Validators.required, Validators.min(1), Validators.max(100)],

@@ -52,6 +52,14 @@ ion-alert {
       color: rgb(1, 228, 1);
       font-weight: bold;
     }
+
+    .alert-input-wrapper {
+      input {
+        text-align: center;
+        background: rgb(255, 255, 255);
+        color: rgb(0, 0, 0) !important;
+      }
+    }
   }
 }
 

@@ -18,6 +18,12 @@ export class ToastService {
     toast.present();
   }
 
+  /**
+   * Present Alert with confirmation and cancel
+   * @param titleAlert Title of Alert
+   * @param messageAlert Content of Alert
+   * @returns promise with text ok or cancel
+   */
   async presentAlertConfirm(
     titleAlert: string,
     messageAlert: string

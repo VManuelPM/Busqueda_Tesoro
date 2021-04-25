@@ -1,10 +1,44 @@
 <app-header [textHeader]="textHeader" [flagArrow]="flagArrow"></app-header>
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row *ngIf="pointsShow">
+      <ion-col>
+        <ion-item class="points">
+          <ion-label>
+            <h1>
+              My points: {{pointsShow}}
+            </h1>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="attemptsGames">
+    <ion-list-header>
+      <h2>
+        I have played...
+      </h2>
+    </ion-list-header>
+
+    <ion-item *ngFor="let gameAttempt of attemptsGames" (click)="detail(gameAttempt)">
+      <ion-avatar slot="start">
+        <img [src]="gameAttempt.image">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{gameAttempt.gameName}}</h2>
+        <ion-label color="success" *ngIf="gameAttempt.pointsAttempt != 0">{{gameAttempt.pointsAttempt}}
+          puntos
+          obtenidos
+        </ion-label>
+        <ion-label *ngIf="gameAttempt.pointsAttempt == 0" color="danger" #attempDanger>0 puntos obtenidos
+        </ion-label>
+        <p>{{gameAttempt.dateAttempt.toDate() | date: 'MMM d, y, h:mm a' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['/admin']">
     <ion-fab-button>
