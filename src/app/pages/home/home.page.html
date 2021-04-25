@@ -2,11 +2,14 @@
 
 <ion-content fullscreen>
   <ion-grid>
-    <ion-row *ngIf="pointsShow">
+    <ion-row>
       <ion-col>
         <ion-item class="points">
           <ion-label>
-            <h1>
+            <h1 *ngIf="pointsShow">
+              My points: {{pointsShow}}
+            </h1>
+            <h1 *ngIf="!pointsShow">
               My points: {{pointsShow}}
             </h1>
           </ion-label>
