@@ -9,12 +9,13 @@ import {
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  uid: string;
+  user: User;
 
   constructor(private authSvc: AuthService, private router: Router) {}
 
@@ -30,7 +31,7 @@ export class AuthGuard implements CanActivate {
       take(1),
       map((user) => {
         console.log('User->', user);
-        this.uid = user.uid;
+        this.user = user;
         if (user) {
           return true;
         } else {
@@ -40,9 +41,5 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
-  }
-
-  getUid() {
-    return this.uid;
   }
 }

@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user';
 import { map } from 'rxjs/operators';
 import { MenuController } from '@ionic/angular';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,9 @@ import { MenuController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   constructor(
     private authSvc: AuthService,
-    private usersService: UsersService,
     private router: Router,
-    private menuController: MenuController
+    private menuController: MenuController,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {}
@@ -28,6 +29,8 @@ export class LoginPage implements OnInit {
       if (user) {
         console.log('user -> ', user);
         this.router.navigate(['/home']);
+      } else {
+        this.toastService.presentAlert('Error', 'User or Password invalid');
       }
     } catch (error) {
       console.log('Error ->', error);

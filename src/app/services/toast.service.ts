@@ -19,6 +19,20 @@ export class ToastService {
   }
 
   /**
+   * Present generic alert
+   * @param titleAlert title of alert
+   * @param message message in alert
+   */
+  async presentAlert(titleAlert, message) {
+    let alert = await this.alertController.create({
+      header: titleAlert,
+      message: message,
+      buttons: ['Dismiss'],
+    });
+    alert.present();
+  }
+
+  /**
    * Present Alert with confirmation and cancel
    * @param titleAlert Title of Alert
    * @param messageAlert Content of Alert

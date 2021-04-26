@@ -40,7 +40,7 @@ const routes: Routes = [
       import('./pages/my-games/my-games.module').then(
         (m) => m.MyGamesPageModule
       ),
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RolGuard],
   },
   {
     path: 'games',

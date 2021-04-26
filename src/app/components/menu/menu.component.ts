@@ -5,6 +5,9 @@ import { MenuService } from '../../services/menu.service';
 import { Menu } from '../../models/menu';
 import { from, Observable } from 'rxjs';
 import { User } from '../../models/user';
+import { AuthGuard } from '../../guards/auth.guard';
+import { UsersService } from '../../services/users.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +18,7 @@ export class MenuComponent implements OnInit {
   //Observable de menus
   menuOptions: Observable<Menu[]>;
   user: User;
+  rol: Observable<User>;
 
   constructor(
     private authSvc: AuthService,
@@ -24,7 +28,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.menuOptions = this.menuService.getMenuOptions();
-
     this.authSvc.getAuthState().subscribe((x) => {
       this.authSvc.getCurrentuser().then((usr) => {
         this.user = usr;
