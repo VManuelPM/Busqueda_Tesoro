@@ -27,6 +27,9 @@ export class GamesPage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Get Games with user id
+   */
   getGames() {
     this.authService
       .getCurrentuser()
@@ -43,6 +46,10 @@ export class GamesPage implements OnInit {
       });
   }
 
+  /**
+   * Reditec to detail game
+   * @param game Object Game
+   */
   attempt(game: Game) {
     this.router.navigate(['/attempt', game.customIdName]);
   }

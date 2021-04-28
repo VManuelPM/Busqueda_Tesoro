@@ -25,7 +25,6 @@ export class LoggedGuard implements CanActivate {
     | boolean
     | UrlTree {
     return this.authSvc.user$.pipe(
-      take(1),
       map((user) => {
         console.log('User->', user);
         if (user) {

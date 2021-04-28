@@ -29,6 +29,9 @@ export class MyGamesPage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Get games of user
+   */
   async getGamesUser() {
     this.authService
       .getCurrentuser()

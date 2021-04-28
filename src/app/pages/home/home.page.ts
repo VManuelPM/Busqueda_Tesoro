@@ -35,11 +35,14 @@ export class HomePage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Get Games of user
+   */
   getDataUser() {
     this.authSvc.getCurrentuser().then((user) => {
       if (user) {
         this.sub1 = this.getAttempts(user.uid)
-          .pipe(take(1))
+          .pipe(take(2))
           .subscribe((attempt) => {
             if (attempt) {
               this.attempts = [];
@@ -55,7 +58,7 @@ export class HomePage implements OnInit {
                         ...this.games.find((t2) => t2.customIdName === t1.gid),
                       }));
                     }
-                    console.log(this.attemptsGames);
+                    //console.log(this.attemptsGames);
                     this.getPoints(this.attempts);
                   }
                 });
@@ -65,6 +68,10 @@ export class HomePage implements OnInit {
     });
   }
 
+  /**
+   * Get points of user
+   * @param attempts attempts of user
+   */
   getPoints(attempts) {
     this.pointsShow = 0;
     attempts.forEach((item) => {
@@ -85,14 +92,27 @@ export class HomePage implements OnInit {
     this.finalise.complete();
   }
 
+  /**
+   * Get Attempts
+   * @param uid user id
+   * @returns observable with attempts
+   */
   getAttempts(uid: string) {
     return this.attemptService.getAttemptsByUId(uid);
   }
 
+  /**
+   * Get all games
+   * @returns Observable with all games
+   */
   getGames() {
     return this.gameService.getAllGames();
   }
 
+  /**
+   * Navigate to detail game
+   * @param gameAtt Object Game
+   */
   detail(gameAtt) {
     this.router.navigate(['/attempt', gameAtt.gid]);
   }

@@ -18,17 +18,29 @@ const { Camera } = Plugins;
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+  //object Game
   game: Game;
+  //Sage resource url with the blob of image
   photo: SafeResourceUrl;
+  //Form
   gameForm: FormGroup;
+  //Image captured
   imageUpload: CameraPhoto;
+  //Tex to sent to header
   textHeader: string;
+  // Text of the button
   textButton: string;
+  //Object generic of form
   objectForm: any;
+  //variable to send to header
   flagArrow = true;
+  //Flag to know state of form
   isSubmitted = false;
+  //Url get from storage
   url: string;
+  // User id
   uid: string;
+  //Game id
   gid: string;
 
   constructor(

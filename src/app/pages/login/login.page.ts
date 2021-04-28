@@ -23,6 +23,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Login User
+   * @param email
+   * @param password
+   */
   async onLogin(email, password) {
     try {
       const user = await this.authSvc.login(email.value, password.value);

@@ -53,7 +53,11 @@ export class AttemptPage implements OnInit {
     });
   }
 
+  /**
+   * Validate if exists attempt
+   */
   initialValidation() {
+    //get param form url
     this.gid = this.route.snapshot.params.gid;
     if (this.gid) {
       this.getGame(this.gid).subscribe((gameRes) => {
@@ -91,6 +95,10 @@ export class AttemptPage implements OnInit {
     return this.gameService.getGameByGameId(idGame);
   }
 
+  /**
+   * sent solution when form is submited
+   * @returns  false when form is invalid
+   */
   onSubmit() {
     this.isSubmitted = true;
     if (!this.attemptForm.valid) {
@@ -130,20 +138,39 @@ export class AttemptPage implements OnInit {
     }
   }
 
+  /**
+   * Get form errors
+   */
   get errorControl() {
     return this.attemptForm.controls;
   }
 
+  /**
+   * Get attemps by user id and game id
+   * @param uid user id
+   * @param gid game id
+   * @returns observable with attempts
+   */
   getAttempt(uid: string, gid: string) {
     if (uid && gid) {
       return this.attempService.getAttemptByUIdAndGId(uid, gid);
     }
   }
 
+  /**
+   * Load attempt
+   * @param uid user id
+   * @param gid game id
+   * @returns Observable with attempts
+   */
   loadAttempt(uid, gid) {
     return this.getAttempt(uid, gid);
   }
 
+  /**
+   * Obtain data of form
+   * @returns object with structure of form
+   */
   getDataForm() {
     return (this.objectForm = {
       solutionUser: this.attemptForm.value.solutionUser,
