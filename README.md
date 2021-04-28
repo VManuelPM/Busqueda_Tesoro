@@ -2,7 +2,7 @@
 
 Looking For Treasures is an ionic app for simulating a play where you can get points attempting to guess the position of the treasure. The application has two users: admins and players. The admin is able to make the CRUD operations on games and play games from differents admins and the player only can play these.
 
-![alt text](https://github.com/VManuelPM/Busqueda_Tesoro/tree/main/src/assets/img/muestra.gif)
+<img src="src/assets/img/muestra1.png" width="800" >
 
 ## Technologies
 
@@ -40,7 +40,7 @@ export const environment = {
 
 In addtion, when you enter with a user first time you need to assing a rol in the document in Firestore Database
 
-![alt text](https://github.com/VManuelPM/Busqueda_Tesoro/tree/main/src/assets/img/muestra2.png)
+<img src="src/assets/img/muestra2.png" width="800">
 
 ## Contributing
 
