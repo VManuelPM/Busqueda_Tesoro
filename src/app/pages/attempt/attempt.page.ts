@@ -63,7 +63,7 @@ export class AttemptPage implements OnInit {
           this.game = gameRes;
           this.authService.getCurrentuser().then((userR) => {
             this.user = userR;
-            if (this.user.uid) {
+            if (userR) {
               this.loadAttempt(this.user.uid, this.gid).subscribe(
                 (attemptRes) => {
                   this.attemptFind = attemptRes[0];

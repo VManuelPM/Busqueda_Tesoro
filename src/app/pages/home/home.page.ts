@@ -6,8 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { Attempt } from '../../models/attempt';
 import { Game } from '../../models/game';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   pointsShow: number;
   sub1: Subscription;
   sub2: Subscription;
+  finalise = new Subject<void>();
 
   constructor(
     private authSvc: AuthService,
@@ -44,10 +45,9 @@ export class HomePage implements OnInit {
               this.attempts = [];
               this.attempts = attempt;
               this.sub2 = this.getGames()
-                .pipe(take(1))
+                .pipe(takeUntil(this.finalise))
                 .subscribe((gameAll) => {
                   if (gameAll) {
-                    this.games = [];
                     this.games = gameAll;
                     if ((this.attemptsGames = [])) {
                       this.attemptsGames = this.attempts.map((t1) => ({
@@ -78,6 +78,11 @@ export class HomePage implements OnInit {
     this.attempts = [];
     this.getDataUser();
     this.menuController.enable(true);
+  }
+
+  ionViewWillLeave() {
+    this.finalise.next();
+    this.finalise.complete();
   }
 
   getAttempts(uid: string) {

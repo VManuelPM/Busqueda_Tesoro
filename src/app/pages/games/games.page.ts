@@ -4,7 +4,7 @@ import { User } from '../../models/user';
 import { GameService } from '../../services/game.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { ToastService } from '../../services/toast.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-games',
@@ -20,23 +20,20 @@ export class GamesPage implements OnInit {
   constructor(
     private gameService: GameService,
     private authService: AuthService,
-    private router: Router,
-    private toastService: ToastService
+    private router: Router
   ) {
     this.getGames();
   }
 
   ngOnInit() {}
 
-  async getGames() {
+  getGames() {
     this.authService
       .getCurrentuser()
       .then((user) => {
         if (user) {
           this.user = user;
-          console.log(user.uid);
           this.gameService.getGames(user.uid).subscribe((res) => {
-            console.log(res);
             this.games = res;
           });
         }

@@ -7,6 +7,12 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class StorageService {
   constructor(private storage: AngularFireStorage) {}
 
+  /**
+   * Upload file to storage
+   * @param id id of object in storage
+   * @param photo file in storage
+   * @returns String with Download url of file
+   */
   async uploadFile(id, photo): Promise<any> {
     if (photo) {
       try {
@@ -21,6 +27,11 @@ export class StorageService {
     }
   }
 
+  /**
+   * Get Image by Download URL
+   * @param urlImage Download url
+   * @returns promise with the image
+   */
   getImage(urlImage: string) {
     try {
       return this.storage.refFromURL(urlImage).getDownloadURL().toPromise();
@@ -29,6 +40,11 @@ export class StorageService {
     }
   }
 
+  /**
+   * Delete Image in storage By Download Url
+   * @param urlImage Download URL
+   * @returns promise with the answer of storage
+   */
   deleteImage(urlImage: string) {
     try {
       return this.storage.refFromURL(urlImage).delete().toPromise();

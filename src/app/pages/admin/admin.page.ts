@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CameraResultType, Plugins, CameraPhoto } from '@capacitor/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GameService } from '../../services/game.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CameraPhoto, CameraResultType, Plugins } from '@capacitor/core';
 import { Game } from '../../models/game';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
+import { GameService } from '../../services/game.service';
 import { ImageService } from '../../services/image.service';
-import { ToastService } from '../../services/toast.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
-import { AlertController } from '@ionic/angular';
+import { ToastService } from '../../services/toast.service';
 
 const { Camera } = Plugins;
 @Component({
@@ -19,7 +18,7 @@ const { Camera } = Plugins;
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  private game: Game;
+  game: Game;
   photo: SafeResourceUrl;
   gameForm: FormGroup;
   imageUpload: CameraPhoto;
@@ -33,7 +32,6 @@ export class AdminPage implements OnInit {
   gid: string;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private gameService: GameService,
     private authService: AuthService,
     private imageService: ImageService,
@@ -42,10 +40,12 @@ export class AdminPage implements OnInit {
     private toastService: ToastService,
     private router: Router,
     private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
     public formBuilder: FormBuilder
   ) {
     this.gid = this.route.snapshot.params.gid;
 
+    //Validate if exists game id to change text of button
     if (this.gid) {
       this.loadGame(this.gid);
       this.textHeader = 'Update Game';
@@ -57,6 +57,13 @@ export class AdminPage implements OnInit {
   }
 
   ngOnInit() {
+    this.instanceForm();
+  }
+
+  /**
+   * Instance reactive form
+   */
+  instanceForm() {
     this.gameForm = this.formBuilder.group({
       gameName: [
         '',
@@ -85,6 +92,10 @@ export class AdminPage implements OnInit {
     });
   }
 
+  /**
+   * Load Game by game Id
+   * @param gameId Id of game
+   */
   loadGame(gameId: string) {
     this.gameService.getGameByGameId(gameId).subscribe((gameInfo) => {
       this.gameForm.controls['gameName'].setValue(gameInfo.gameName);
@@ -95,6 +106,10 @@ export class AdminPage implements OnInit {
     });
   }
 
+  /**
+   * Save or update game when form is submited
+   * @returns false if the form is not valid
+   */
   onSubmit() {
     this.isSubmitted = true;
     if (!this.gameForm.valid) {
@@ -119,10 +134,16 @@ export class AdminPage implements OnInit {
     }
   }
 
+  /**
+   * Get the errors of form
+   */
   get errorControl() {
     return this.gameForm.controls;
   }
 
+  /**
+   * Take a picture of camera or get picture from gallery
+   */
   async takePicture() {
     const image = await Camera.getPhoto({
       quality: 100,
@@ -208,6 +229,9 @@ export class AdminPage implements OnInit {
     }
   }
 
+  /**
+   * Delete a game
+   */
   deleteGame() {
     if (this.gid) {
       if (this.url) {
