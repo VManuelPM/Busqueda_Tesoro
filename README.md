@@ -2,7 +2,7 @@
 
 Looking For Treasures is an ionic app for simulating a play where you can get points attempting to guess the position of the treasure. The application has two users: admins and players. The admin is able to make the CRUD operations on games and play games from differents admins and the player only can play these.
 
-<img src="src/assets/img/muestra1.png" width="800" >
+<img src="src/assets/img/muestra.gif" width="800" >
 
 ## Technologies
 
